@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote</title>
+    <link href="output.css" rel="stylesheet" />
+    <script>
+      function getQuote() {
+        let apiUrl = "https://api.quotable.io/random";
+
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("quote").innerText =
+              '"' + data.content + '"';
+            document.getElementById("author").innerText = "- " + data.author;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      window.onload = function () {
+        getQuote();
+      };
+    </script>
+  </head>
+  <body
+    class="h-14 bg-gradient-to-r from-sky-500 to-indigo-500 text-3xl text-center"
+  >
+    <h1 class="mt-8 font-semibold text-slate-50">
+      <span class="text-yellow-400">QuoteToday</span>, Makes Better Your Day
+    </h1>
+    <button
+      onclick="getQuote()"
+      class="p-5 bg-yellow-500 rounded-2xl m-5 font-bold shadow-lg"
+    >
+      Refresh
+    </button>
+    <div>
+      <div id="quote-container" class="p-5 mx-10 text-white">
+        <h3 id="quote" class="p-5 italic"></h3>
+        <h4 id="author"></h4>
+      </div>
+    </div>
+  </body>
+</html>
